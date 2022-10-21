@@ -1,0 +1,74 @@
+<div class="view">
+ 
+<div class="header" onload="time()">
+  <div id="time"><strong>{{today | date: 'HH:mm'}}</strong></div>   <!--{{data1 | date: 'HH:mm'}}-->
+  <div id="tempo"><strong>TEMPO REAL</strong></div>
+  <div id="logo">TAURUS</div>
+</div>
+
+<div class="flex-table" id="container">
+  <table mat-table [dataSource]="dataSource" class="table">
+    
+    <ng-container matColumnDef="os">
+      <th id="os" mat-header-cell *matHeaderCellDef > <strong>OS</strong> </th> <!--*ngIf="os.atrasada" class="pi pi-exclamation-triangle" style="font-size: 1rem; color:red"-->
+      <td class="row1" mat-cell *matCellDef="let element"> 
+        <!-- <mat-icon aria-hidden="false" aria-label="Example pi-exclamation-triangle icon" fontIcon="pi-exclamation-triangle">pi-exclamation-triangle</mat-icon> -->
+        <mat-icon class="icon" *ngIf="emergencia">warning</mat-icon>
+        <!--
+          highlight
+          wb_incandescent
+          rocket_launch
+          hearing
+          add_alert
+          notification_important
+          warning
+        -->
+        {{element.os}} 
+      </td> <!--[ngIf]="real_status === 'Finalizado'">-->
+    </ng-container>
+    <ng-container matColumnDef="local">
+      <th id="os"  mat-header-cell *matHeaderCellDef> LOCAL </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.local}} </td>
+    </ng-container>
+    <ng-container matColumnDef="destino">
+      <th id="os"  mat-header-cell *matHeaderCellDef> DESTINO </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.destino}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lider">
+      <th id="os"  mat-header-cell *matHeaderCellDef> LÍDER </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.lider}}</td>
+    </ng-container>
+    <ng-container matColumnDef="inicio">
+      <th id="os"  mat-header-cell *matHeaderCellDef> INÍCIO </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.inicio}}</td>
+    </ng-container>
+    <ng-container matColumnDef="termino">
+      <th id="os"  mat-header-cell *matHeaderCellDef> TÉRMINO </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.termino}}</td>
+    </ng-container>
+    <ng-container matColumnDef="tempo">
+      <th id="os"  mat-header-cell *matHeaderCellDef> TEMPO </th>
+      <td class="row1" mat-cell *matCellDef="let element"> {{element.tempo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status" >
+      <th id="os"  mat-header-cell *matHeaderCellDef> STATUS </th>
+      <td class="row1" mat-cell *matCellDef="let element" [ngStyle]="{
+      'color': (execucao ? 'blue' : 'red')}"> {{element.status}} </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> POSITION </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}}</td>
+    </ng-container> -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+    ></tr>
+    
+  </table>
+
+</div> 
+
+</div>
